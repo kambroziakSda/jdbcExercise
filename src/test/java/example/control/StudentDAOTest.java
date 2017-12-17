@@ -1,6 +1,6 @@
 package example.control;
 
-import example.ScriptRunnerProvider;
+import example.DatabaseUtil;
 import example.TestHelper;
 import example.entity.Student;
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +29,7 @@ public class StudentDAOTest {
     }
 
     private void prepareDatabaseForTest() throws SQLException, IOException {
-        scriptRunner = ScriptRunnerProvider.runScriptRunner();
+        scriptRunner = DatabaseUtil.prepareDatabase();
     }
 
     @Test

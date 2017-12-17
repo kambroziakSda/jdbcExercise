@@ -30,7 +30,6 @@ CREATE TABLE IF NOT EXISTS `studentgrade` (
   `value`     DOUBLE           NOT NULL,
   `date`      DATE             NOT NULL,
   `studentid` INT(11) UNSIGNED NOT NULL,
-  CHECK (`value` >= 0),
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -46,3 +45,19 @@ VALUES
 
 INSERT INTO `studentgrade` (value, date, studentid) VALUES (5,'2017-12-12',1);
 
+
+DROP TABLE IF EXISTS `animal`;
+CREATE TABLE IF NOT EXISTS `animal` (
+  `id`        INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name`     VARCHAR(20)           NOT NULL,
+  `type`      VARCHAR(20)             NOT NULL,
+  `age` INT(11) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`)
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8;
+
+INSERT INTO `animal` (`name`, `type`, `age`)
+VALUES
+  ('Azor', 'Pies', '10');

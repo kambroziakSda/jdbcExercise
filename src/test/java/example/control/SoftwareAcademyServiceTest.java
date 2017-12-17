@@ -1,6 +1,6 @@
 package example.control;
 
-import example.ScriptRunnerProvider;
+import example.DatabaseUtil;
 import example.entity.StudentGrade;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.assertj.core.api.Assertions;
@@ -29,7 +29,7 @@ public class SoftwareAcademyServiceTest {
     }
 
     private void prepareDatabaseForTest() throws SQLException, IOException {
-        scriptRunner = ScriptRunnerProvider.runScriptRunner();
+        scriptRunner = DatabaseUtil.prepareDatabase();
     }
 
     @Test
