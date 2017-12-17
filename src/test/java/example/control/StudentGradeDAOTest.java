@@ -1,7 +1,6 @@
 package example.control;
 
-import example.ScriptRunnerProvider;
-import example.control.StudentGradeDAO;
+import example.DatabaseUtil;
 import example.entity.StudentGrade;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.assertj.core.api.Assertions;
@@ -10,8 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +29,7 @@ public class StudentGradeDAOTest {
     }
 
     private void prepareDatabaseForTest() throws SQLException, IOException {
-        scriptRunner = ScriptRunnerProvider.runScriptRunner();
+        scriptRunner = DatabaseUtil.prepareDatabase();
     }
 
     @Test

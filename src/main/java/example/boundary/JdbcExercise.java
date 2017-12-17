@@ -1,6 +1,8 @@
 package example.boundary;
 
 import example.DatabaseConnectionProvider;
+import example.DatabaseUtil;
+import org.apache.ibatis.jdbc.ScriptRunner;
 
 import java.io.IOException;
 import java.sql.*;
@@ -11,17 +13,19 @@ import java.sql.*;
 public class JdbcExercise {
 
     public static void main(String args[]) throws SQLException, IOException {
+        ScriptRunner scriptRunner = DatabaseUtil.prepareDatabase();
 
-        try (Connection connection = DatabaseConnectionProvider.getConnection();
-             Statement statement = connection.createStatement()) {
+        Connection connection = DatabaseConnectionProvider.getConnection();
 
-            ResultSet resultSet = statement.executeQuery("show databases");
-            while (resultSet.next()) {
-                String database = resultSet.getString("Database");
-                System.out.println(database);
-            }
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM animal");
 
+        while (resultSet.next()) {
+            System.out.println(resultSet.getString("name"));
         }
+
+        scriptRunner.closeConnection();
+
     }
 
 

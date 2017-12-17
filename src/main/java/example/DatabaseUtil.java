@@ -12,9 +12,9 @@ import java.util.Properties;
 /**
  * Created by krzysztof on 16.12.17.
  */
-public class ScriptRunnerProvider {
+public class DatabaseUtil {
 
-    public static ScriptRunner runScriptRunner() throws SQLException, IOException {
+    public static ScriptRunner prepareDatabase() throws SQLException, IOException {
         Connection connection = getConnection();
         ScriptRunner scriptRunner = new ScriptRunner(connection);
         scriptRunner.setLogWriter(new PrintWriter(new FileWriter(new File("log.txt"))));
@@ -25,7 +25,7 @@ public class ScriptRunnerProvider {
     }
 
     private static Connection getConnection() throws IOException, SQLException {
-        InputStream inputStream = DatabaseConnectionProvider.class.getClassLoader().getResourceAsStream("mysql_test.properties");
+        InputStream inputStream = DatabaseConnectionProvider.class.getClassLoader().getResourceAsStream("database_test.properties");
         Properties properties = new Properties();
         properties.load(inputStream);
         String url = properties.getProperty("url");
