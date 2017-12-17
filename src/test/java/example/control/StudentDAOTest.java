@@ -35,6 +35,7 @@ public class StudentDAOTest {
     @Test
     public void testGetAllStudents() throws IOException, SQLException {
         List<Student> allStudents = sut.getAllStudents();
+        Assertions.assertThat(allStudents).size().isEqualTo(3);
         TestHelper.allStudentConditions()
                 .stream()
                 .forEach(connection -> Assertions.assertThat(allStudents).are(connection));
@@ -108,9 +109,9 @@ public class StudentDAOTest {
 
     @Test
     public void removeStudentTest() throws IOException, SQLException {
-        sut.removeStudent(1);
+        int removed = sut.removeStudent(1);
         Optional<Student> studentById = sut.findStudentById(1);
-
+        Assertions.assertThat(removed).isEqualTo(1);
         Assertions.assertThat(studentById)
                 .isEmpty();
     }

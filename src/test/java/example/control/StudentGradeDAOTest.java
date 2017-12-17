@@ -66,9 +66,8 @@ public class StudentGradeDAOTest {
 
     @Test
     public void getAverageStudentGradeFromSopot() throws IOException, SQLException {
-        sut.saveStudentGrade(new StudentGrade(3, 3, new Date()));
-        Optional<Double> averageStudentGradeFromGdansk = sut.getAverageStudentGradeFromCity("Sopot");
-        Assertions.assertThat(averageStudentGradeFromGdansk)
+        Optional<Double> averageStudentGradeFromSopot = sut.getAverageStudentGradeFromCity("Sopot");
+        Assertions.assertThat(averageStudentGradeFromSopot)
                 .isEmpty();
     }
 
