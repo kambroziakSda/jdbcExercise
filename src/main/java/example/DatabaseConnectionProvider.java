@@ -21,4 +21,14 @@ public class DatabaseConnectionProvider {
         String password = properties.getProperty("password");
         return DriverManager.getConnection(url, user, password);
     }
+
+    public static Connection getSetupConnection() throws IOException, SQLException {
+        InputStream inputStream = DatabaseConnectionProvider.class.getClassLoader().getResourceAsStream("database_test.properties");
+        Properties properties = new Properties();
+        properties.load(inputStream);
+        String url = properties.getProperty("url");
+        String user = properties.getProperty("user");
+        String password = properties.getProperty("password");
+        return DriverManager.getConnection(url, user, password);
+    }
 }

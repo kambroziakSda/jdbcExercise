@@ -15,7 +15,7 @@ import java.util.Properties;
 public class DatabaseUtil {
 
     public static ScriptRunner prepareDatabase() throws SQLException, IOException {
-        Connection connection = getConnection();
+        Connection connection = DatabaseConnectionProvider.getSetupConnection();
         ScriptRunner scriptRunner = new ScriptRunner(connection);
         scriptRunner.setLogWriter(new PrintWriter(new FileWriter(new File("log.txt"))));
         scriptRunner.runScript(new InputStreamReader(StudentGradeDAO.class.getResourceAsStream("/data.sql")));
@@ -23,15 +23,4 @@ public class DatabaseUtil {
         scriptRunner.runScript(new InputStreamReader(StudentGradeDAO.class.getResourceAsStream("/trigger.sql")));
         return scriptRunner;
     }
-
-    private static Connection getConnection() throws IOException, SQLException {
-        InputStream inputStream = DatabaseConnectionProvider.class.getClassLoader().getResourceAsStream("database_test.properties");
-        Properties properties = new Properties();
-        properties.load(inputStream);
-        String url = properties.getProperty("url");
-        String user = properties.getProperty("user");
-        String password = properties.getProperty("password");
-        return DriverManager.getConnection(url, user, password);
-    }
-
 }

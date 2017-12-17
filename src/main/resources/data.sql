@@ -43,15 +43,15 @@ VALUES
   ('Anna', 'Sopot', 'anna123', '1985-02-03', 0),
   ('Piotr', 'Gdańsk', 'piotr123', '1996-03-01', 0);
 
-INSERT INTO `studentgrade` (value, date, studentid) VALUES (5,'2017-12-12',1);
+INSERT INTO `studentgrade` (value, date, studentid) VALUES (5, '2017-12-12', 1);
 
 
 DROP TABLE IF EXISTS `animal`;
 CREATE TABLE IF NOT EXISTS `animal` (
-  `id`        INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name`     VARCHAR(20)           NOT NULL,
-  `type`      VARCHAR(20)             NOT NULL,
-  `age` INT(11) UNSIGNED NOT NULL,
+  `id`   INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(20)      NOT NULL,
+  `type` VARCHAR(20)      NOT NULL,
+  `age`  INT(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
