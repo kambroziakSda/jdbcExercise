@@ -25,8 +25,7 @@ VALUES
   ('Piotr', 'Gdańsk', 'piotr123', '1996-03-01', 0);
 
 INSERT INTO studentgrade (value, date, studentid) VALUES
-  (5, '2017-12-12', 1),
-  (3, '2017-12-12', 1);
+  (5, '2017-12-12', 1);
 
 
 DROP TABLE IF EXISTS animal;

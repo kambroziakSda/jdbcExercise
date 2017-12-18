@@ -1,11 +1,10 @@
 package example.boundary;
 
-import example.DatabaseConnectionProvider;
 import example.DatabaseUtil;
-import org.apache.ibatis.jdbc.ScriptRunner;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.SQLException;
 
 /**
  * Created by krzysztof on 13.12.17.
@@ -13,9 +12,6 @@ import java.sql.*;
 public class JdbcExercise {
 
     public static void main(String args[]) throws SQLException, IOException {
-        DatabaseUtil.prepareDatabase();
-        //System.out.println(DatabaseConnectionProvider.getSetupConnection().isValid(100));
-
     }
 }
 
