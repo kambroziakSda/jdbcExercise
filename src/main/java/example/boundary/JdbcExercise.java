@@ -13,7 +13,8 @@ import java.sql.*;
 public class JdbcExercise {
 
     public static void main(String args[]) throws SQLException, IOException {
-
+        DatabaseUtil.prepareDatabase();
+        //System.out.println(DatabaseConnectionProvider.getSetupConnection().isValid(100));
 
     }
 }
