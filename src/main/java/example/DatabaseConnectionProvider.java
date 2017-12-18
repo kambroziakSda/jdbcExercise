@@ -13,7 +13,7 @@ import java.util.Properties;
 public class DatabaseConnectionProvider {
 
     public static Connection getConnection() throws SQLException, IOException {
-        InputStream inputStream = DatabaseConnectionProvider.class.getClassLoader().getResourceAsStream("database.properties");
+        InputStream inputStream = DatabaseConnectionProvider.class.getClassLoader().getResourceAsStream("postgres/postgres.properties");
         Properties properties = new Properties();
         properties.load(inputStream);
         String url = properties.getProperty("url");
