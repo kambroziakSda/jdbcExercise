@@ -76,7 +76,7 @@ public class StudentDAO {
 
     public void saveStudent(Student student) throws IOException, SQLException {
         Connection connection = DatabaseConnectionProvider.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO student (`name`,`password`,`city`,`birthday`) VALUES (?,?,?,?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO student (name,password,city,birthday) VALUES (?,?,?,?)");
         preparedStatement.setString(1, student.getName());
         preparedStatement.setString(2, student.getPassword());
         preparedStatement.setString(3, student.getCity());
@@ -87,7 +87,7 @@ public class StudentDAO {
 
     public void saveAllStudents(List<Student> students) throws IOException, SQLException {
         Connection connection = DatabaseConnectionProvider.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO student (`name`,`password`,`city`,`birthday`) VALUES (?,?,?,?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO student (name,password,city,birthday) VALUES (?,?,?,?)");
 
         for (Student student : students) {
             preparedStatement.setString(1, student.getName());

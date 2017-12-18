@@ -22,7 +22,7 @@ public class StudentGradeDAO {
     }
 
     private int saveStudentGradeInternal(StudentGrade studentGrade, Connection connection) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO studentgrade (`value`, `date`, `studentid`) VALUES (?,?,?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO studentgrade (value, date, studentid) VALUES (?,?,?)");
         preparedStatement.setInt(1, studentGrade.getValue());
         preparedStatement.setDate(2, new Date(studentGrade.getDate().getTime()));
         preparedStatement.setInt(3, studentGrade.getStudentId());
@@ -75,7 +75,7 @@ public class StudentGradeDAO {
         preparedStatement.setString(1, city);
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        if (resultSet.first()) {
+        while (resultSet.next()) {
             return Optional.of(resultSet.getDouble("avg_value"));
         }
         connection.close();
