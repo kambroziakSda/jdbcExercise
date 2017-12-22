@@ -15,41 +15,46 @@ import java.util.Optional;
 public class StudentGradeDAO {
 
     public int saveStudentGrade(StudentGrade studentGrade) throws IOException, SQLException {
-        Connection connection = DatabaseConnectionProvider.getConnection();
-        int update = saveStudentGradeInternal(studentGrade, connection);
-        connection.close();
-        return update;
+        try (Connection connection = DatabaseConnectionProvider.getConnection()) {
+            return saveStudentGradeInternal(studentGrade, connection);
+        }
     }
 
     private int saveStudentGradeInternal(StudentGrade studentGrade, Connection connection) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO studentgrade (value, date, studentid) VALUES (?,?,?)");
-        preparedStatement.setInt(1, studentGrade.getValue());
-        preparedStatement.setDate(2, new Date(studentGrade.getDate().getTime()));
-        preparedStatement.setInt(3, studentGrade.getStudentId());
-        return preparedStatement.executeUpdate();
+        String sql = "INSERT INTO studentgrade (value, date, studentid) VALUES (?,?,?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, studentGrade.getValue());
+            preparedStatement.setDate(2, new Date(studentGrade.getDate().getTime()));
+            preparedStatement.setInt(3, studentGrade.getStudentId());
+            return preparedStatement.executeUpdate();
+        }
+
     }
 
     public int saveStudentGrade(StudentGrade studentGrade, Connection connection) throws IOException, SQLException {
-        int update = saveStudentGradeInternal(studentGrade, connection);
-        return update;
+        return saveStudentGradeInternal(studentGrade, connection);
     }
 
     public List<StudentGrade> getAllGradesByStudentId(Integer studentId) throws IOException, SQLException {
-        Connection connection = DatabaseConnectionProvider.getConnection();
-        List<StudentGrade> allSudentGrades = getStudentGrades(studentId, connection);
-        connection.close();
-        return allSudentGrades;
+        try (Connection connection = DatabaseConnectionProvider.getConnection()) {
+            List<StudentGrade> allSudentGrades = getStudentGrades(studentId, connection);
+            return allSudentGrades;
+        }
+
     }
 
     private List<StudentGrade> getStudentGrades(Integer studentId, Connection connection) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM studentgrade where studentid = ?");
-        preparedStatement.setInt(1, studentId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        List<StudentGrade> allSudentGrades = new ArrayList<>();
-        while (resultSet.next()) {
-            addGrade(resultSet, allSudentGrades);
+        String sql = "SELECT * FROM studentgrade where studentid = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, studentId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<StudentGrade> allSudentGrades = new ArrayList<>();
+            while (resultSet.next()) {
+                addGrade(resultSet, allSudentGrades);
+            }
+            return allSudentGrades;
         }
-        return allSudentGrades;
+
     }
 
     public List<StudentGrade> getAllGradesByStudentId(Integer studentId, Connection connection) throws SQLException {
@@ -57,29 +62,31 @@ public class StudentGradeDAO {
     }
 
     public List<StudentGrade> getAllStudentGradesFromCity(String city) throws IOException, SQLException {
-        Connection connection = DatabaseConnectionProvider.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM studentgrade sg join student s on sg.studentid = s.id where s.city = ?");
-        preparedStatement.setString(1, city);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        List<StudentGrade> studentGrades = new ArrayList<>();
-        while (resultSet.next()) {
-            addGrade(resultSet, studentGrades);
+        String sql = "SELECT * FROM studentgrade sg join student s on sg.studentid = s.id where s.city = ?";
+        try (Connection connection = DatabaseConnectionProvider.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
+            preparedStatement.setString(1, city);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<StudentGrade> studentGrades = new ArrayList<>();
+            while (resultSet.next()) {
+                addGrade(resultSet, studentGrades);
+            }
+            return studentGrades;
         }
-        connection.close();
-        return studentGrades;
+
+
     }
 
     public Optional<Double> getAverageStudentGradeFromCity(String city) throws IOException, SQLException {
-        Connection connection = DatabaseConnectionProvider.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT AVG(VALUE) as avg_value FROM studentgrade sg join student s on sg.studentid = s.id where s.city = ? GROUP BY s.city");
-        preparedStatement.setString(1, city);
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        while (resultSet.next()) {
-            return Optional.of(resultSet.getDouble("avg_value"));
+        try (Connection connection = DatabaseConnectionProvider.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT AVG(VALUE) as avg_value FROM studentgrade sg join student s on sg.studentid = s.id where s.city = ? GROUP BY s.city")) {
+            preparedStatement.setString(1, city);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return Optional.of(resultSet.getDouble("avg_value"));
+            }
+            return Optional.empty();
         }
-        connection.close();
-        return Optional.empty();
     }
 
 

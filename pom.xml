@@ -39,11 +39,13 @@
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
-            <groupId>postgresql</groupId>
+            <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.4.1208-jdbc42-atlassian-hosted</version>
+            <version>42.1.4</version>
         </dependency>
+
 
     </dependencies>
 

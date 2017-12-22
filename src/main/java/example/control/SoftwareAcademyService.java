@@ -49,7 +49,6 @@ public class SoftwareAcademyService {
         } finally {
             connection.close();
         }
-
     }
 
 
@@ -59,9 +58,7 @@ public class SoftwareAcademyService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Double averageGrade = studentDAO.findStudentById(1).get().getAverageGrade();
-        System.out.println(averageGrade);
-        return averageGrade;
+        return studentDAO.findStudentById(1).get().getAverageGrade();
     }
 
     public StudentDAO getStudentDAO() {
