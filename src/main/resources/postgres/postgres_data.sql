@@ -11,7 +11,7 @@ CREATE TABLE student (
 DROP TABLE IF EXISTS studentgrade;
 CREATE TABLE studentgrade (
   id        SERIAL PRIMARY KEY,
-  VALUE     NUMERIC(3, 2) NOT NULL,
+  VALUE     INTEGER NOT NULL,
   DATE      DATE          NOT NULL,
   studentid INTEGER       NOT NULL,
   CHECK (VALUE > 1),
