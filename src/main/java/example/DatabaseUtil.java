@@ -26,7 +26,7 @@ public class DatabaseUtil {
         return scriptRunner;
     }
 
-    public static ScriptRunner preparePostgresSqlDatabase() throws SQLException, IOException {
+    private static ScriptRunner preparePostgresSqlDatabase() throws SQLException, IOException {
         Connection connection = getConnection("postgres/postgres_init.properties");
         ScriptRunner scriptRunner = new ScriptRunner(connection);
         scriptRunner.setLogWriter(new PrintWriter(new FileWriter(new File("log.txt"))));

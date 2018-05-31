@@ -28,15 +28,20 @@ INSERT INTO studentgrade (value, date, studentid) VALUES
   (5, '2017-12-12', 1);
 
 
-DROP TABLE IF EXISTS animal;
-CREATE TABLE animal (
+INSERT INTO animal (NAME, TYPE, age)
+VALUES
+  ('Azor', 'Pies', 10);
+
+
+DROP TABLE IF EXISTS example_users;
+CREATE TABLE example_users (
   id   SERIAL PRIMARY KEY,
   name TEXT    NOT NULL,
-  type TEXT    NOT NULL,
+  password TEXT    NOT NULL,
   age  INTEGER NOT NULL
 
 );
 
-INSERT INTO animal (NAME, TYPE, age)
+INSERT INTO example_users (NAME, password, age)
 VALUES
-  ('Azor', 'Pies', '10');
+  ('Jan', '123', 20);
