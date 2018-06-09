@@ -13,7 +13,7 @@ import java.util.Properties;
 public class DatabaseUtil {
 
     public static ScriptRunner prepareDatabase() throws IOException, SQLException {
-        return preparePostgresSqlDatabase();
+        return prepareMySqlDatabase();
     }
 
     public static ScriptRunner prepareMySqlDatabase() throws SQLException, IOException {

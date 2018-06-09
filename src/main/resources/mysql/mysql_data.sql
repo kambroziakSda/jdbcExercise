@@ -61,3 +61,20 @@ CREATE TABLE IF NOT EXISTS `animal` (
 INSERT INTO `animal` (`name`, `type`, `age`)
 VALUES
   ('Azor', 'Pies', '10');
+
+
+DROP TABLE IF EXISTS `example_users`;
+CREATE TABLE `example_users` (
+  `id`   INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  name TEXT    NOT NULL,
+  password TEXT    NOT NULL,
+  age  INTEGER NOT NULL,
+  PRIMARY KEY (`id`)
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8;
+
+INSERT INTO example_users (name, password, age)
+VALUES
+  ('Jan', '123', 20),('Kasia', '321', 21);

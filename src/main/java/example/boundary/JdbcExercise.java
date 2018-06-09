@@ -12,7 +12,6 @@ import java.sql.SQLException;
 public class JdbcExercise {
 
     public static void main(String args[]) throws SQLException, IOException {
-        DatabaseUtil.preparePostgresSqlDatabase();
     }
 
 
