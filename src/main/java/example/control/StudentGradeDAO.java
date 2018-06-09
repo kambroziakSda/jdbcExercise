@@ -14,6 +14,10 @@ import java.util.Optional;
  */
 public class StudentGradeDAO {
 
+    /**
+     * TODO zad. 9 - Uzupełnij implementacje tak aby metoda zapisywała ocene studenta do bazy i zwracala ilosc dodanych rekordow
+     * * Po zaimplementowaniu sukcesem powinien konczyc sie test example.control.StudentGradeDAOTest.saveStudentGradeTest
+     */
     public int saveStudentGrade(StudentGrade studentGrade) throws IOException, SQLException {
         try (Connection connection = DatabaseConnectionProvider.getConnection()) {
             return saveStudentGradeInternal(studentGrade, connection);
@@ -31,10 +35,17 @@ public class StudentGradeDAO {
 
     }
 
+    /**
+     * TODO zad. 9.1 - Uzupełnij implementacje tak aby metoda robiła to co w zad 9 ale na połączeniu otrzymywanym jako parametr
+     */
     public int saveStudentGrade(StudentGrade studentGrade, Connection connection) throws IOException, SQLException {
         return saveStudentGradeInternal(studentGrade, connection);
     }
 
+    /**
+     * TODO zad. 10 - Uzupełnij implementacje tak aby metoda zwracała wszystkie oceny stuenta o zadanym id
+     * * Po zaimplementowaniu sukcesem powinien konczyc sie test example.control.StudentGradeDAOTest.getAllStudentGradesTest
+     */
     public List<StudentGrade> getAllGradesByStudentId(Integer studentId) throws IOException, SQLException {
         try (Connection connection = DatabaseConnectionProvider.getConnection()) {
             List<StudentGrade> allSudentGrades = getStudentGrades(studentId, connection);
@@ -57,10 +68,17 @@ public class StudentGradeDAO {
 
     }
 
+    /**
+     * TODO zad. 10.1 - Uzupełnij implementacje tak aby metoda robiła to co w zad 10 ale na połączeniu otrzymywanym jako parametr
+     */
     public List<StudentGrade> getAllGradesByStudentId(Integer studentId, Connection connection) throws SQLException {
         return getStudentGrades(studentId, connection);
     }
 
+    /**
+     * TODO zad. 11 - Uzupełnij implementacje tak aby metoda zwracala oceny wszystkich studentów z zadanego miasta
+     *  * * Po zaimplementowaniu sukcesem powinien konczyc sie test example.control.StudentGradeDAOTest.getAllStudentGradesFromGdanskTest
+     */
     public List<StudentGrade> getAllStudentGradesFromCity(String city) throws IOException, SQLException {
         String sql = "SELECT * FROM studentgrade sg join student s on sg.studentid = s.id where s.city = ?";
         try (Connection connection = DatabaseConnectionProvider.getConnection();
@@ -77,6 +95,12 @@ public class StudentGradeDAO {
 
     }
 
+    /**
+     * TODO zad. 12 - Uzupełnij implementacje tak aby metoda zwracala srednia ocene studentów z zadanego miasta
+     *  * * Po zaimplementowaniu sukcesem powinien konczyc sie test example.control.StudentGradeDAOTest.getAverageStudentGradeFromGdansk
+     * Uwaga: W implementacji nalezy wykorzystać funkcje sql avg oraz AS
+     * * @see <https://www.w3schools.com/sql/sql_count_avg_sum.asp">AVG</a>
+     */
     public Optional<Double> getAverageStudentGradeFromCity(String city) throws IOException, SQLException {
         try (Connection connection = DatabaseConnectionProvider.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT AVG(VALUE) as avg_value FROM studentgrade sg join student s on sg.studentid = s.id where s.city = ? GROUP BY s.city")) {
