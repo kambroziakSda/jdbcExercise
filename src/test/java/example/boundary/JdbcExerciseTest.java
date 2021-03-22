@@ -32,7 +32,7 @@ public class JdbcExerciseTest {
         //Class.forName("com.mysql.jdbc.Driver");
         for (int i = 0; i < 100; i++) {
             try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306?characterEncoding=utf8",
-                    "root", "root")) {
+                    "root", "sda")) {
 
                 boolean valid = connection.isValid(1000);
                 System.out.println(valid);
@@ -49,7 +49,7 @@ public class JdbcExerciseTest {
     @Test
     public void testSimpleSelect() throws IOException, SQLException {
         try (Connection connection = DatabaseConnectionProvider.getConnection();
-             Statement statement = connection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+             Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
              ResultSet resultSet = statement.executeQuery("select * from example_users")) {
 
             while (resultSet.next()) {
