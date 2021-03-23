@@ -51,7 +51,6 @@ public class JdbcExerciseTest {
         try (Connection connection = DatabaseConnectionProvider.getConnection();
              Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
              ResultSet resultSet = statement.executeQuery("select * from example_users")) {
-
             while (resultSet.next()) {
                 String name = resultSet.getString("name");
                 System.out.println("User: " + name);
