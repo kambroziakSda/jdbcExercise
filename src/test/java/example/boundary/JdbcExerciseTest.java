@@ -417,11 +417,33 @@ public class JdbcExerciseTest {
 
 
             }
-
-
             connection.commit();
-
         }
 
     }
+
+    @Test
+    public void testCreateTable() throws IOException, SQLException {
+        try (Connection connection = DatabaseConnectionProvider.getConnection();
+             Statement statement = connection.createStatement()) {
+
+            String createTableSql = "CREATE TABLE IF NOT EXISTS `example_student` (\n" +
+                    "  `id`           INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,\n" +
+                    "  `name`         VARCHAR(20)      NOT NULL DEFAULT '',\n" +
+                    "  `city`         VARCHAR(20)               DEFAULT '',\n" +
+                    "  `password`     VARCHAR(20)      NOT NULL DEFAULT '',\n" +
+                    "  `birthday`     DATE,\n" +
+                    "  `averagegrade` DOUBLE,\n" +
+                    "  PRIMARY KEY (`id`)\n" +
+                    ")\n" +
+                    "  ENGINE = InnoDB\n" +
+                    "  AUTO_INCREMENT = 1\n" +
+                    "  DEFAULT CHARSET = utf8;";
+
+            statement.execute(createTableSql);
+
+        }
+    }
+
+
 }
