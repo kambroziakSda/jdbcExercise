@@ -1,12 +1,12 @@
 CREATE DATABASE IF NOT EXISTS softwareacademy;
 USE softwareacademy;
 
-CREATE USER IF NOT EXISTS 'user_softwareacademy'@'localhost'
-  IDENTIFIED BY 'softwareacademy123';
+CREATE USER IF NOT EXISTS 'user2_softwareacademy'@'%'
+  IDENTIFIED BY 'Softwareacademy123$';
 
-GRANT USAGE ON *.* TO 'user_softwareacademy'@'localhost';
---IDENTIFIED BY 'softwareacademy123';
-GRANT ALL PRIVILEGES ON softwareacademy.* TO 'user_softwareacademy'@'localhost';
+GRANT USAGE ON *.* TO 'user2_softwareacademy'@'%';
+--IDENTIFIED BY 'Softwareacademy123$';
+GRANT ALL PRIVILEGES ON softwareacademy.* TO 'user2_softwareacademy'@'%';
 
 FLUSH PRIVILEGES;
 

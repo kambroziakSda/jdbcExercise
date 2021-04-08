@@ -32,7 +32,7 @@ public class JdbcExerciseTest {
         //Class.forName("com.mysql.jdbc.Driver");
         for (int i = 0; i < 500; i++) {
             // try () {
-            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306?characterEncoding=utf8",
+            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306?characterEncoding=utf8&serverTimezone=UTC",
                     "root", "sda")) {
 
                 boolean valid = connection.isValid(1000);
